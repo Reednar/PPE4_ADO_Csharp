@@ -29,6 +29,7 @@ namespace PPE4_ADO_Csharp
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.label_Num = new System.Windows.Forms.Label();
             this.label_Nom = new System.Windows.Forms.Label();
             this.label_Prenom = new System.Windows.Forms.Label();
@@ -39,6 +40,8 @@ namespace PPE4_ADO_Csharp
             this.btn_Annuler = new System.Windows.Forms.Button();
             this.btn_Valider = new System.Windows.Forms.Button();
             this.cb_Nation = new System.Windows.Forms.ComboBox();
+            this.bs = new System.Windows.Forms.BindingSource(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.bs)).BeginInit();
             this.SuspendLayout();
             // 
             // label_Num
@@ -144,6 +147,7 @@ namespace PPE4_ADO_Csharp
             this.Controls.Add(this.label_Num);
             this.Name = "FicheAuteur";
             this.Text = "FicheAuteur";
+            ((System.ComponentModel.ISupportInitialize)(this.bs)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -161,5 +165,6 @@ namespace PPE4_ADO_Csharp
         private System.Windows.Forms.Button btn_Annuler;
         private System.Windows.Forms.Button btn_Valider;
         private System.Windows.Forms.ComboBox cb_Nation;
+        private System.Windows.Forms.BindingSource bs;
     }
 }

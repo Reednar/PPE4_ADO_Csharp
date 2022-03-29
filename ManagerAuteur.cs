@@ -1,0 +1,62 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using MySql.Data.MySqlClient;
+
+
+namespace PPE4_ADO_Csharp
+{
+    public class ManagerAuteur
+    {
+        public static Auteur DonneAuteurDuReader(MySqlDataReader monReader)
+        {
+            Auteur unAuteur = new Auteur();
+            unAuteur.Num = Convert.ToInt16(monReader["num"]);
+            unAuteur.Nom = monReader["nom"] == DBNull.Value ? "" : monReader["nom"] as string; // If ternaire
+            unAuteur.Prenom = monReader["prenom"] == DBNull.Value ? "" : monReader["prenom"] as string; // If ternaire
+            unAuteur.Nationalite = monReader["nationalite"] == DBNull.Value ? "" : monReader["nationalite"] as string; // If ternaire
+            return unAuteur;
+        }
+
+        public static List<Auteur> DonneAuteurs()
+        {
+            List<Auteur> lesAuteurs = new List<Auteur>();
+            MySqlCommand maRequete;
+            MySqlDataReader monReader;
+            Connection.MaConnection.Open(); // connexion a la bdd
+            maRequete = Connection.MaConnection.CreateCommand(); // Pour faire une requete
+            maRequete.CommandText = "select * from auteur order by nom"; // Requete sql
+            monReader = maRequete.ExecuteReader(); // Permet d'executer la requete
+            while (monReader.Read()) // Tant qu'il lis quelque chose
+            {
+                Auteur unAuteur = ManagerAuteur.DonneAuteurDuReader(monReader);
+                lesAuteurs.Add(unAuteur);
+            }
+            monReader.Close();
+            Connection.MaConnection.Close(); // Ferme la connexion
+            return lesAuteurs;
+        }
+
+        public static Auteur DonneAuteurParId(int id)
+        {
+
+        }
+
+        public static bool ModifieAuteur(Auteur a)
+        {
+
+        }
+
+        public static bool AjouterAuteur(Auteur a)
+        {
+
+        }
+
+        public static bool SupprimerAuteur(Auteur a)
+        {
+
+        }
+    }
+}

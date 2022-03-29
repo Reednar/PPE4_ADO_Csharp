@@ -29,28 +29,33 @@ namespace PPE4_ADO_Csharp
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.dgv_ListeAuteurs = new System.Windows.Forms.DataGridView();
-            this.Num = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Nom = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Prenom = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Nation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btn_Afficher = new System.Windows.Forms.Button();
             this.btn_Modifier = new System.Windows.Forms.Button();
             this.btn_Supprimer = new System.Windows.Forms.Button();
             this.btn_Ajouter = new System.Windows.Forms.Button();
+            this.bs = new System.Windows.Forms.BindingSource(this.components);
+            this.Num = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Nom = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Prenom = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Nation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_ListeAuteurs)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bs)).BeginInit();
             this.SuspendLayout();
             // 
             // dgv_ListeAuteurs
             // 
             this.dgv_ListeAuteurs.AllowUserToAddRows = false;
             this.dgv_ListeAuteurs.AllowUserToDeleteRows = false;
+            this.dgv_ListeAuteurs.AutoGenerateColumns = false;
             this.dgv_ListeAuteurs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_ListeAuteurs.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Num,
             this.Nom,
             this.Prenom,
             this.Nation});
+            this.dgv_ListeAuteurs.DataSource = this.bs;
             this.dgv_ListeAuteurs.Location = new System.Drawing.Point(12, 12);
             this.dgv_ListeAuteurs.MultiSelect = false;
             this.dgv_ListeAuteurs.Name = "dgv_ListeAuteurs";
@@ -58,31 +63,6 @@ namespace PPE4_ADO_Csharp
             this.dgv_ListeAuteurs.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgv_ListeAuteurs.Size = new System.Drawing.Size(561, 434);
             this.dgv_ListeAuteurs.TabIndex = 0;
-            // 
-            // Num
-            // 
-            this.Num.HeaderText = "Numéro";
-            this.Num.Name = "Num";
-            this.Num.ReadOnly = true;
-            // 
-            // Nom
-            // 
-            this.Nom.HeaderText = "Nom";
-            this.Nom.Name = "Nom";
-            this.Nom.ReadOnly = true;
-            this.Nom.Width = 200;
-            // 
-            // Prenom
-            // 
-            this.Prenom.HeaderText = "Prénom";
-            this.Prenom.Name = "Prenom";
-            this.Prenom.ReadOnly = true;
-            // 
-            // Nation
-            // 
-            this.Nation.HeaderText = "Nationalité";
-            this.Nation.Name = "Nation";
-            this.Nation.ReadOnly = true;
             // 
             // btn_Afficher
             // 
@@ -122,6 +102,35 @@ namespace PPE4_ADO_Csharp
             this.btn_Ajouter.Text = "Ajouter";
             this.btn_Ajouter.UseVisualStyleBackColor = true;
             // 
+            // Num
+            // 
+            this.Num.DataPropertyName = "num";
+            this.Num.HeaderText = "Numéro";
+            this.Num.Name = "Num";
+            this.Num.ReadOnly = true;
+            // 
+            // Nom
+            // 
+            this.Nom.DataPropertyName = "nom";
+            this.Nom.HeaderText = "Nom";
+            this.Nom.Name = "Nom";
+            this.Nom.ReadOnly = true;
+            this.Nom.Width = 200;
+            // 
+            // Prenom
+            // 
+            this.Prenom.DataPropertyName = "prenom";
+            this.Prenom.HeaderText = "Prénom";
+            this.Prenom.Name = "Prenom";
+            this.Prenom.ReadOnly = true;
+            // 
+            // Nation
+            // 
+            this.Nation.DataPropertyName = "nationalite";
+            this.Nation.HeaderText = "Nationalité";
+            this.Nation.Name = "Nation";
+            this.Nation.ReadOnly = true;
+            // 
             // Form_ListeAuteurs
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -135,6 +144,7 @@ namespace PPE4_ADO_Csharp
             this.Name = "Form_ListeAuteurs";
             this.Text = "Liste des auteurs";
             ((System.ComponentModel.ISupportInitialize)(this.dgv_ListeAuteurs)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bs)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -142,14 +152,15 @@ namespace PPE4_ADO_Csharp
         #endregion
 
         private System.Windows.Forms.DataGridView dgv_ListeAuteurs;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Num;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Nom;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Prenom;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Nation;
         private System.Windows.Forms.Button btn_Afficher;
         private System.Windows.Forms.Button btn_Modifier;
         private System.Windows.Forms.Button btn_Supprimer;
         private System.Windows.Forms.Button btn_Ajouter;
+        private System.Windows.Forms.BindingSource bs;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Num;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Nom;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Prenom;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Nation;
     }
 }
 

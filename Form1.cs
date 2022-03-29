@@ -13,10 +13,7 @@ namespace PPE4_ADO_Csharp
 {
     public partial class Form_ListeAuteurs : Form
     {
-        private string connectionString = "server=serverbtssiojv.ddns.net;port=3306;Database=lepie_ado;Uid=lepie;password=lepie"; // Pour la bdd
-        private MySqlConnection maConnection;
-        private MySqlCommand maRequete;
-        private MySqlDataReader monReader;
+        List<Auteur> lesAuteurs = new List<Auteur>();
 
         public Form_ListeAuteurs()
         {
@@ -28,20 +25,8 @@ namespace PPE4_ADO_Csharp
         {
             try
             {
-                dgv_ListeAuteurs.Rows.Clear();
-                Connection.MaConnection.Open(); // connexion a la bdd
-                maRequete = maConnection.CreateCommand(); // Pour faire une requete
-                maRequete.CommandText = "select * from auteur order by nom"; // Requete sql
-                monReader = maRequete.ExecuteReader(); // Permet d'executer la requete
-                while (monReader.Read()) // Tant qu'il lis quelque chose
-                {
-                    dgv_ListeAuteurs.Rows.Add( // Ajoute une ligne pour chaque auteur qu'il trouve
-                        monReader["num"].ToString(),
-                        monReader["nom"].ToString(),
-                        monReader["prenom"].ToString(),
-                        monReader["nationalite"].ToString()
-                        );
-                }
+                lesAuteurs = ManagerAuteur.DonneAuteurs();
+                bs.DataSource = lesAuteurs;
             }
             catch (Exception ex)
             {
@@ -50,8 +35,7 @@ namespace PPE4_ADO_Csharp
             }
             finally
             {
-                monReader.Close();
-                maConnection.Close(); // Ferme la connexion
+
             }
         }
 

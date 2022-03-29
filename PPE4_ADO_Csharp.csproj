@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Auteur.cs" />
     <Compile Include="Connection.cs" />
     <Compile Include="FicheAuteur.cs">
       <SubType>Form</SubType>
@@ -60,6 +61,7 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="ManagerAuteur.cs" />
     <Compile Include="Menu.cs">
       <SubType>Form</SubType>
     </Compile>

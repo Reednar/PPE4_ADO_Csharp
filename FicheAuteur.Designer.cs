@@ -82,6 +82,7 @@ namespace PPE4_ADO_Csharp
             // 
             // tb_Num
             // 
+            this.tb_Num.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bs, "Num", true));
             this.tb_Num.Enabled = false;
             this.tb_Num.Location = new System.Drawing.Point(122, 30);
             this.tb_Num.Name = "tb_Num";
@@ -90,6 +91,7 @@ namespace PPE4_ADO_Csharp
             // 
             // tb_Nom
             // 
+            this.tb_Nom.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bs, "Nom", true));
             this.tb_Nom.Location = new System.Drawing.Point(122, 70);
             this.tb_Nom.Name = "tb_Nom";
             this.tb_Nom.Size = new System.Drawing.Size(133, 20);
@@ -97,6 +99,7 @@ namespace PPE4_ADO_Csharp
             // 
             // tb_Prenom
             // 
+            this.tb_Prenom.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bs, "Prenom", true));
             this.tb_Prenom.Location = new System.Drawing.Point(122, 114);
             this.tb_Prenom.Name = "tb_Prenom";
             this.tb_Prenom.Size = new System.Drawing.Size(133, 20);
@@ -124,11 +127,16 @@ namespace PPE4_ADO_Csharp
             // 
             // cb_Nation
             // 
+            this.cb_Nation.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bs, "Nationalite", true));
             this.cb_Nation.FormattingEnabled = true;
             this.cb_Nation.Location = new System.Drawing.Point(122, 164);
             this.cb_Nation.Name = "cb_Nation";
             this.cb_Nation.Size = new System.Drawing.Size(133, 21);
             this.cb_Nation.TabIndex = 10;
+            // 
+            // bs
+            // 
+            this.bs.DataSource = typeof(PPE4_ADO_Csharp.Auteur);
             // 
             // FicheAuteur
             // 

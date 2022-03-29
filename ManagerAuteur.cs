@@ -41,22 +41,57 @@ namespace PPE4_ADO_Csharp
 
         public static Auteur DonneAuteurParId(int id)
         {
+            Auteur unAuteur = new Auteur();
 
+            return unAuteur;
         }
 
-        public static bool ModifieAuteur(Auteur a)
+        public static bool ModifierAuteur(Auteur a)
         {
+            MySqlCommand maRequete;
+            bool result = false;
+            maRequete = Connection.MaConnection.CreateCommand();
+            maRequete.CommandText = "update auteur set " +
+                "nom='"+a.Nom+"', prenom='"+a.Prenom+"', nationalite='"+a.Nationalite+"' where num='"+a.Num+"'";
+            maRequete.Parameters.Clear();
+            maRequete.Parameters.AddWithValue("@paramNom", a.Nom);
+            maRequete.Parameters.AddWithValue("@paramPrenom", a.Prenom);
+            maRequete.Parameters.AddWithValue("@paramNation", a.Nationalite);
+            maRequete.Parameters.AddWithValue("@paramNumAuteur", a.Num);
 
+            try
+            {
+                Connection.MaConnection.Open();
+                int resultat = maRequete.ExecuteNonQuery();
+                Connection.MaConnection.Close();
+                if (resultat > 0)
+                {
+                    result = true;
+                }
+                else
+                {
+                    throw new Exception("Une erreur s'est produite !");
+                }
+                return result;
+
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
         }
 
         public static bool AjouterAuteur(Auteur a)
         {
-
+            bool result = true;
+            return result;
         }
 
         public static bool SupprimerAuteur(Auteur a)
         {
-
+            bool result = true;
+            return result;
         }
     }
 }

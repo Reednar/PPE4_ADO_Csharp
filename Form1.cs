@@ -41,16 +41,26 @@ namespace PPE4_ADO_Csharp
 
         private void btn_Afficher_Click(object sender, EventArgs e)
         {
-            int element = Convert.ToInt16(dgv_ListeAuteurs.SelectedRows[0].Cells[0].Value.ToString()); // Recupère le num de la ligne qui a été cliquer
-            FicheAuteur frm = new FicheAuteur(false, element);
-            frm.Show();
+            Auteur AuteurSelectionne = new Auteur();
+            DataGridViewRow ligne = dgv_ListeAuteurs.SelectedRows[0];
+            AuteurSelectionne = ligne.DataBoundItem as Auteur;
+            if(AuteurSelectionne != null)
+            {
+                FicheAuteur frm = new FicheAuteur(false, AuteurSelectionne);
+                frm.ShowDialog();
+            }
         }
 
         private void btn_Modifier_Click(object sender, EventArgs e)
         {
-            int element = Convert.ToInt16(dgv_ListeAuteurs.SelectedRows[0].Cells[0].Value.ToString()); // Recupère le num de la ligne qui a été cliquer
-            FicheAuteur frm = new FicheAuteur(true, element);
-            frm.Show();
+            Auteur AuteurSelectionne = new Auteur();
+            DataGridViewRow ligne = dgv_ListeAuteurs.SelectedRows[0];
+            AuteurSelectionne = ligne.DataBoundItem as Auteur;
+            if (AuteurSelectionne != null)
+            {
+                FicheAuteur frm = new FicheAuteur(true, AuteurSelectionne);
+                frm.ShowDialog();
+            }
         }
     }
 }

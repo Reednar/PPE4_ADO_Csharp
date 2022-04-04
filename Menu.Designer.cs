@@ -80,18 +80,21 @@ namespace PPE4_ADO_Csharp
             this.genresToolStripMenuItem.Name = "genresToolStripMenuItem";
             this.genresToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.genresToolStripMenuItem.Text = "Genres";
+            this.genresToolStripMenuItem.Click += new System.EventHandler(this.genresToolStripMenuItem_Click);
             // 
             // adhérentsToolStripMenuItem
             // 
             this.adhérentsToolStripMenuItem.Name = "adhérentsToolStripMenuItem";
             this.adhérentsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.adhérentsToolStripMenuItem.Text = "Adhérents";
+            this.adhérentsToolStripMenuItem.Click += new System.EventHandler(this.adhérentsToolStripMenuItem_Click);
             // 
             // livresToolStripMenuItem
             // 
             this.livresToolStripMenuItem.Name = "livresToolStripMenuItem";
             this.livresToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.livresToolStripMenuItem.Text = "Livres";
+            this.livresToolStripMenuItem.Click += new System.EventHandler(this.livresToolStripMenuItem_Click);
             // 
             // Menu
             // 
@@ -100,7 +103,9 @@ namespace PPE4_ADO_Csharp
             this.ClientSize = new System.Drawing.Size(290, 277);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
+            this.MaximizeBox = false;
             this.Name = "Menu";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Menu";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();

@@ -8,96 +8,55 @@ using MySql.Data.MySqlClient;
 
 namespace PPE4_ADO_Csharp
 {
-    public class ManagerAuteur
+    public class ManagerAdherent
     {
-        public static Auteur DonneAuteurDuReader(MySqlDataReader monReader)
+        public static Adherent DonneAdherentDuReader(MySqlDataReader monReader)
         {
-            Auteur unAuteur = new Auteur();
-            unAuteur.Num = Convert.ToInt16(monReader["num"]);
-            unAuteur.Nom = monReader["nom"] == DBNull.Value ? "" : monReader["nom"] as string; // If ternaire
-            unAuteur.Prenom = monReader["prenom"] == DBNull.Value ? "" : monReader["prenom"] as string; // If ternaire
-            unAuteur.Nationalite = monReader["nationalite"] == DBNull.Value ? "" : monReader["nationalite"] as string; // If ternaire
-            return unAuteur;
+            Adherent unAdherent = new Adherent();
+            unAdherent.Num = Convert.ToInt16(monReader["num"]);
+            unAdherent.Nom = monReader["nom"] == DBNull.Value ? "" : monReader["nom"] as string; // If ternaire
+            unAdherent.Prenom = monReader["prenom"] == DBNull.Value ? "" : monReader["prenom"] as string; // If ternaire
+            unAdherent.AdrRue = monReader["adrRue"] == DBNull.Value ? "" : monReader["adrRue"] as string; // If ternaire
+            unAdherent.AdrCP = Convert.ToInt32(monReader["num"]); // If ternaire
+            unAdherent.AdrVille = monReader["adrVille"] == DBNull.Value ? "" : monReader["adrVille"] as string; // If ternaire
+            unAdherent.Tel = monReader["tel"] == DBNull.Value ? "" : monReader["tel"] as string; // If ternaire
+            unAdherent.Mel = monReader["mel"] == DBNull.Value ? "" : monReader["mel"] as string; // If ternaire
+            return unAdherent;
         }
 
-        public static List<Auteur> DonneAuteurs()
+        public static List<Adherent> DonneAdherents()
         {
-            List<Auteur> lesAuteurs = new List<Auteur>();
+            List<Adherent> lesAdherents = new List<Adherent>();
             MySqlCommand maRequete;
             MySqlDataReader monReader;
             Connection.MaConnection.Open(); // connexion a la bdd
             maRequete = Connection.MaConnection.CreateCommand(); // Pour faire une requete
-            maRequete.CommandText = "select * from auteur order by nom"; // Requete sql
+            maRequete.CommandText = "select * from adherent order by nom"; // Requete sql
             monReader = maRequete.ExecuteReader(); // Permet d'executer la requete
             while (monReader.Read()) // Tant qu'il lis quelque chose
             {
-                Auteur unAuteur = ManagerAuteur.DonneAuteurDuReader(monReader);
-                lesAuteurs.Add(unAuteur);
+                Adherent unAdherent = ManagerAdherent.DonneAdherentDuReader(monReader);
+                lesAdherents.Add(unAdherent);
             }
             monReader.Close();
             Connection.MaConnection.Close(); // Ferme la connexion
-            return lesAuteurs;
+            return lesAdherents;
         }
 
-        public static Auteur DonneAuteurParId(int id)
+        public static Adherent DonneAdherentParId(int id)
         {
-            MySqlCommand maRequete;
-            MySqlDataReader monReader;
+            Adherent unAdherent = new Adherent();
 
-            maRequete = Connection.MaConnection.CreateCommand(); // Pour faire une requete
-            maRequete.CommandText = "select * from auteur where num='"+id+"'"; // Requete sql
-            monReader = maRequete.ExecuteReader(); // Permet d'executer la requete
-            monReader.Read();
-            Auteur auteur = new Auteur(Convert.ToInt16(monReader["num"]), monReader["prenom"] as string, monReader["nom"] as string, monReader["nationalite"] as string);
-            Connection.MaConnection.Close(); // Ferme la connexion
-
-            return auteur;
-
-
+            return unAdherent;
         }
 
-        public static bool ModifierAuteur(Auteur a)
+        public static bool ModifierAdherent(Adherent a)
         {
             MySqlCommand maRequete;
             bool result = false;
             maRequete = Connection.MaConnection.CreateCommand();
-            maRequete.CommandText = "update auteur set " +
-                "nom='"+a.Nom+"', prenom='"+a.Prenom+"', nationalite='"+a.Nationalite+"' where num='"+a.Num+"'";
-            maRequete.Parameters.Clear();
-            maRequete.Parameters.AddWithValue("@paramNom", a.Nom);
-            maRequete.Parameters.AddWithValue("@paramPrenom", a.Prenom);
-            maRequete.Parameters.AddWithValue("@paramNation", a.Nationalite);
-            maRequete.Parameters.AddWithValue("@paramNumAuteur", a.Num);
-
-            try
-            {
-                Connection.MaConnection.Open();
-                int resultat = maRequete.ExecuteNonQuery();
-                Connection.MaConnection.Close();
-                if (resultat > 0)
-                {
-                    result = true;
-                }
-                else
-                {
-                    throw new Exception("Une erreur s'est produite !");
-                }
-                return result;
-
-            }
-            catch (Exception ex)
-            {
-
-                throw new Exception(ex.Message);
-            }
-        }
-
-        public static bool AjouterAuteur(Auteur a)
-        {
-            bool result = false;
-            MySqlCommand maRequete;
-            maRequete = Connection.MaConnection.CreateCommand();
-            maRequete.CommandText = "insert into auteur (nom, prenom, nationalite) values ('"+a.Nom+"', '"+a.Prenom+"', '"+a.Nationalite+"')";
+            maRequete.CommandText = "update adherent set " +
+                "nom='" + a.Nom + "', prenom='" + a.Prenom + "', adrRue='" + a.AdrRue + "', adrCP='" + a.AdrCP + "', adrVile='" + a.AdrVille + "', tel='" + a.Tel + "', mel='" + a.Mel + "' where num='" + a.Num + "'";
             maRequete.Parameters.Clear();
 
             try
@@ -123,12 +82,43 @@ namespace PPE4_ADO_Csharp
             }
         }
 
-        public static bool SupprimerAuteur(Auteur a)
+        public static bool AjouterAdherent(Adherent a)
         {
             bool result = false;
             MySqlCommand maRequete;
             maRequete = Connection.MaConnection.CreateCommand();
-            maRequete.CommandText = "delete from auteur where num='"+a.Num+"'";
+            maRequete.CommandText = "insert into adherent (nom, prenom, adrRue, adrCP, adrVille, tel, mel) values ('" + a.Nom + "', '" + a.Prenom + "', '" + a.AdrRue + "', '" + a.AdrCP + "', '" + a.AdrVille + "', '" + a.Tel + "', '" + a.Mel + "')";
+            maRequete.Parameters.Clear();
+
+            try
+            {
+                Connection.MaConnection.Open();
+                int resultat = maRequete.ExecuteNonQuery();
+                Connection.MaConnection.Close();
+                if (resultat > 0)
+                {
+                    result = true;
+                }
+                else
+                {
+                    throw new Exception("Une erreur s'est produite !");
+                }
+                return result;
+
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public static bool SupprimerAdherent(Adherent a)
+        {
+            bool result = false;
+            MySqlCommand maRequete;
+            maRequete = Connection.MaConnection.CreateCommand();
+            maRequete.CommandText = "delete from adherent where num='" + a.Num + "'";
             maRequete.Parameters.Clear();
 
             try

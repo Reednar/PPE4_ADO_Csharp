@@ -142,7 +142,7 @@ namespace PPE4_ADO_Csharp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(307, 264);
+            this.ClientSize = new System.Drawing.Size(320, 264);
             this.Controls.Add(this.cb_Nation);
             this.Controls.Add(this.btn_Valider);
             this.Controls.Add(this.btn_Annuler);
@@ -153,6 +153,7 @@ namespace PPE4_ADO_Csharp
             this.Controls.Add(this.label_Prenom);
             this.Controls.Add(this.label_Nom);
             this.Controls.Add(this.label_Num);
+            this.MaximizeBox = false;
             this.Name = "FicheAuteur";
             this.Text = "FicheAuteur";
             ((System.ComponentModel.ISupportInitialize)(this.bs)).EndInit();

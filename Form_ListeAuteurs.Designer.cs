@@ -31,15 +31,15 @@ namespace PPE4_ADO_Csharp
         {
             this.components = new System.ComponentModel.Container();
             this.dgv_ListeAuteurs = new System.Windows.Forms.DataGridView();
-            this.btn_Afficher = new System.Windows.Forms.Button();
-            this.btn_Modifier = new System.Windows.Forms.Button();
-            this.btn_Supprimer = new System.Windows.Forms.Button();
-            this.btn_Ajouter = new System.Windows.Forms.Button();
-            this.bs = new System.Windows.Forms.BindingSource(this.components);
             this.Num = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nom = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Prenom = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nation = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bs = new System.Windows.Forms.BindingSource(this.components);
+            this.btn_Afficher = new System.Windows.Forms.Button();
+            this.btn_Modifier = new System.Windows.Forms.Button();
+            this.btn_Supprimer = new System.Windows.Forms.Button();
+            this.btn_Ajouter = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_ListeAuteurs)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bs)).BeginInit();
             this.SuspendLayout();
@@ -48,6 +48,9 @@ namespace PPE4_ADO_Csharp
             // 
             this.dgv_ListeAuteurs.AllowUserToAddRows = false;
             this.dgv_ListeAuteurs.AllowUserToDeleteRows = false;
+            this.dgv_ListeAuteurs.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgv_ListeAuteurs.AutoGenerateColumns = false;
             this.dgv_ListeAuteurs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_ListeAuteurs.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -64,8 +67,41 @@ namespace PPE4_ADO_Csharp
             this.dgv_ListeAuteurs.Size = new System.Drawing.Size(561, 434);
             this.dgv_ListeAuteurs.TabIndex = 0;
             // 
+            // Num
+            // 
+            this.Num.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Num.DataPropertyName = "num";
+            this.Num.HeaderText = "Numéro";
+            this.Num.Name = "Num";
+            this.Num.ReadOnly = true;
+            // 
+            // Nom
+            // 
+            this.Nom.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Nom.DataPropertyName = "nom";
+            this.Nom.HeaderText = "Nom";
+            this.Nom.Name = "Nom";
+            this.Nom.ReadOnly = true;
+            // 
+            // Prenom
+            // 
+            this.Prenom.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Prenom.DataPropertyName = "prenom";
+            this.Prenom.HeaderText = "Prénom";
+            this.Prenom.Name = "Prenom";
+            this.Prenom.ReadOnly = true;
+            // 
+            // Nation
+            // 
+            this.Nation.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.Nation.DataPropertyName = "nationalite";
+            this.Nation.HeaderText = "Nationalité";
+            this.Nation.Name = "Nation";
+            this.Nation.ReadOnly = true;
+            // 
             // btn_Afficher
             // 
+            this.btn_Afficher.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btn_Afficher.Location = new System.Drawing.Point(699, 29);
             this.btn_Afficher.Name = "btn_Afficher";
             this.btn_Afficher.Size = new System.Drawing.Size(75, 23);
@@ -76,6 +112,7 @@ namespace PPE4_ADO_Csharp
             // 
             // btn_Modifier
             // 
+            this.btn_Modifier.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btn_Modifier.Location = new System.Drawing.Point(699, 76);
             this.btn_Modifier.Name = "btn_Modifier";
             this.btn_Modifier.Size = new System.Drawing.Size(75, 23);
@@ -86,50 +123,25 @@ namespace PPE4_ADO_Csharp
             // 
             // btn_Supprimer
             // 
+            this.btn_Supprimer.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btn_Supprimer.Location = new System.Drawing.Point(699, 129);
             this.btn_Supprimer.Name = "btn_Supprimer";
             this.btn_Supprimer.Size = new System.Drawing.Size(75, 23);
             this.btn_Supprimer.TabIndex = 3;
             this.btn_Supprimer.Text = "Supprimer";
             this.btn_Supprimer.UseVisualStyleBackColor = true;
+            this.btn_Supprimer.Click += new System.EventHandler(this.btn_Supprimer_Click);
             // 
             // btn_Ajouter
             // 
+            this.btn_Ajouter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btn_Ajouter.Location = new System.Drawing.Point(699, 181);
             this.btn_Ajouter.Name = "btn_Ajouter";
             this.btn_Ajouter.Size = new System.Drawing.Size(75, 23);
             this.btn_Ajouter.TabIndex = 4;
             this.btn_Ajouter.Text = "Ajouter";
             this.btn_Ajouter.UseVisualStyleBackColor = true;
-            // 
-            // Num
-            // 
-            this.Num.DataPropertyName = "num";
-            this.Num.HeaderText = "Numéro";
-            this.Num.Name = "Num";
-            this.Num.ReadOnly = true;
-            // 
-            // Nom
-            // 
-            this.Nom.DataPropertyName = "nom";
-            this.Nom.HeaderText = "Nom";
-            this.Nom.Name = "Nom";
-            this.Nom.ReadOnly = true;
-            this.Nom.Width = 200;
-            // 
-            // Prenom
-            // 
-            this.Prenom.DataPropertyName = "prenom";
-            this.Prenom.HeaderText = "Prénom";
-            this.Prenom.Name = "Prenom";
-            this.Prenom.ReadOnly = true;
-            // 
-            // Nation
-            // 
-            this.Nation.DataPropertyName = "nationalite";
-            this.Nation.HeaderText = "Nationalité";
-            this.Nation.Name = "Nation";
-            this.Nation.ReadOnly = true;
+            this.btn_Ajouter.Click += new System.EventHandler(this.btn_Ajouter_Click);
             // 
             // Form_ListeAuteurs
             // 
@@ -142,6 +154,7 @@ namespace PPE4_ADO_Csharp
             this.Controls.Add(this.btn_Afficher);
             this.Controls.Add(this.dgv_ListeAuteurs);
             this.Name = "Form_ListeAuteurs";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Liste des auteurs";
             ((System.ComponentModel.ISupportInitialize)(this.dgv_ListeAuteurs)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bs)).EndInit();

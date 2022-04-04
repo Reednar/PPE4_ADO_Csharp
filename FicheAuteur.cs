@@ -17,7 +17,7 @@ namespace PPE4_ADO_Csharp
         private MySqlDataReader monReader;
         Auteur AuteurCourant = new Auteur();
 
-        public FicheAuteur(bool modification, Auteur monAuteur=null)
+        public FicheAuteur(int modification, Auteur monAuteur=null)
         {
             InitializeComponent();
             RemplirComboNationalite();
@@ -29,11 +29,15 @@ namespace PPE4_ADO_Csharp
                 }
                 bs.DataSource = AuteurCourant;
                 
-                if (modification == false)
+                if (modification == 0)
                 {
                     tb_Nom.Enabled = false;
                     tb_Prenom.Enabled = false;
                     cb_Nation.Enabled = false;
+                }
+                else if(modification == 3){
+                    tb_Num.Visible = false;
+                    label_Num.Visible = false;
                 }
             }
             catch (Exception ex)
@@ -77,11 +81,14 @@ namespace PPE4_ADO_Csharp
                     {
                         AuteurCourant = bs.Current as Auteur;
                         bool reponse = ManagerAuteur.AjouterAuteur(AuteurCourant);
+                        MessageBox.Show("L'auteur " + AuteurCourant.Prenom + " a bien été ajouter !");
                     }
                     else
                     {
                         AuteurCourant = bs.Current as Auteur;
                         bool reponse = ManagerAuteur.ModifierAuteur(AuteurCourant);
+                        MessageBox.Show("L'auteur " + AuteurCourant.Prenom + " a bien été modifier !");
+
                     }
                     this.Close();
                 }

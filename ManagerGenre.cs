@@ -8,66 +8,52 @@ using MySql.Data.MySqlClient;
 
 namespace PPE4_ADO_Csharp
 {
-    public class ManagerAuteur
+    public class ManagerGenre
     {
-        public static Auteur DonneAuteurDuReader(MySqlDataReader monReader)
+        public static Genre DonneGenreDuReader(MySqlDataReader monReader)
         {
-            Auteur unAuteur = new Auteur();
-            unAuteur.Num = Convert.ToInt16(monReader["num"]);
-            unAuteur.Nom = monReader["nom"] == DBNull.Value ? "" : monReader["nom"] as string; // If ternaire
-            unAuteur.Prenom = monReader["prenom"] == DBNull.Value ? "" : monReader["prenom"] as string; // If ternaire
-            unAuteur.Nationalite = monReader["nationalite"] == DBNull.Value ? "" : monReader["nationalite"] as string; // If ternaire
-            return unAuteur;
+            Genre unGenre = new Genre();
+            unGenre.Num = Convert.ToInt16(monReader["num"]);
+            unGenre.Libelle = monReader["libelle"] == DBNull.Value ? "" : monReader["libelle"] as string; // If ternaire
+            return unGenre;
         }
 
-        public static List<Auteur> DonneAuteurs()
+        public static List<Genre> DonneGenres()
         {
-            List<Auteur> lesAuteurs = new List<Auteur>();
+            List<Genre> lesGenres = new List<Genre>();
             MySqlCommand maRequete;
             MySqlDataReader monReader;
-            Connection.MaConnection.Open(); // connexion a la bdd
+            Connection.MaConnection.Open(); // connexion g la bdd
             maRequete = Connection.MaConnection.CreateCommand(); // Pour faire une requete
-            maRequete.CommandText = "select * from auteur order by nom"; // Requete sql
+            maRequete.CommandText = "select * from genre order by libelle"; // Requete sql
             monReader = maRequete.ExecuteReader(); // Permet d'executer la requete
             while (monReader.Read()) // Tant qu'il lis quelque chose
             {
-                Auteur unAuteur = ManagerAuteur.DonneAuteurDuReader(monReader);
-                lesAuteurs.Add(unAuteur);
+                Genre unGenre = ManagerGenre.DonneGenreDuReader(monReader);
+                lesGenres.Add(unGenre);
             }
             monReader.Close();
             Connection.MaConnection.Close(); // Ferme la connexion
-            return lesAuteurs;
+            return lesGenres;
         }
 
-        public static Auteur DonneAuteurParId(int id)
+        public static Genre DonneGenreParId(int id)
         {
-            MySqlCommand maRequete;
-            MySqlDataReader monReader;
+            Genre unGenre = new Genre();
 
-            maRequete = Connection.MaConnection.CreateCommand(); // Pour faire une requete
-            maRequete.CommandText = "select * from auteur where num='"+id+"'"; // Requete sql
-            monReader = maRequete.ExecuteReader(); // Permet d'executer la requete
-            monReader.Read();
-            Auteur auteur = new Auteur(Convert.ToInt16(monReader["num"]), monReader["prenom"] as string, monReader["nom"] as string, monReader["nationalite"] as string);
-            Connection.MaConnection.Close(); // Ferme la connexion
-
-            return auteur;
-
-
+            return unGenre;
         }
 
-        public static bool ModifierAuteur(Auteur a)
+        public static bool ModifierGenre(Genre g)
         {
             MySqlCommand maRequete;
             bool result = false;
             maRequete = Connection.MaConnection.CreateCommand();
-            maRequete.CommandText = "update auteur set " +
-                "nom='"+a.Nom+"', prenom='"+a.Prenom+"', nationalite='"+a.Nationalite+"' where num='"+a.Num+"'";
+            maRequete.CommandText = "update genre set " +
+                "libelle='"+g.Libelle+"' where num='" + g.Num + "'";
             maRequete.Parameters.Clear();
-            maRequete.Parameters.AddWithValue("@paramNom", a.Nom);
-            maRequete.Parameters.AddWithValue("@paramPrenom", a.Prenom);
-            maRequete.Parameters.AddWithValue("@paramNation", a.Nationalite);
-            maRequete.Parameters.AddWithValue("@paramNumAuteur", a.Num);
+            maRequete.Parameters.AddWithValue("@paramNom", g.Libelle);
+            maRequete.Parameters.AddWithValue("@paramNumGenre", g.Num);
 
             try
             {
@@ -92,12 +78,12 @@ namespace PPE4_ADO_Csharp
             }
         }
 
-        public static bool AjouterAuteur(Auteur a)
+        public static bool AjouterGenre(Genre g)
         {
             bool result = false;
             MySqlCommand maRequete;
             maRequete = Connection.MaConnection.CreateCommand();
-            maRequete.CommandText = "insert into auteur (nom, prenom, nationalite) values ('"+a.Nom+"', '"+a.Prenom+"', '"+a.Nationalite+"')";
+            maRequete.CommandText = "insert into genre (libelle) values ('" + g.Libelle + "')";
             maRequete.Parameters.Clear();
 
             try
@@ -123,12 +109,12 @@ namespace PPE4_ADO_Csharp
             }
         }
 
-        public static bool SupprimerAuteur(Auteur a)
+        public static bool SupprimerGenre(Genre g)
         {
             bool result = false;
             MySqlCommand maRequete;
             maRequete = Connection.MaConnection.CreateCommand();
-            maRequete.CommandText = "delete from auteur where num='"+a.Num+"'";
+            maRequete.CommandText = "delete from genre where num='" + g.Num + "'";
             maRequete.Parameters.Clear();
 
             try

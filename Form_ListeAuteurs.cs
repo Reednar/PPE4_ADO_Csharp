@@ -46,7 +46,8 @@ namespace PPE4_ADO_Csharp
             AuteurSelectionne = ligne.DataBoundItem as Auteur;
             if(AuteurSelectionne != null)
             {
-                FicheAuteur frm = new FicheAuteur(false, AuteurSelectionne);
+                FicheAuteur frm = new FicheAuteur(0, AuteurSelectionne); // 1 Affichage
+                frm.Text = "Fiche auteur de " + AuteurSelectionne.Prenom;
                 frm.ShowDialog();
             }
         }
@@ -58,9 +59,38 @@ namespace PPE4_ADO_Csharp
             AuteurSelectionne = ligne.DataBoundItem as Auteur;
             if (AuteurSelectionne != null)
             {
-                FicheAuteur frm = new FicheAuteur(true, AuteurSelectionne);
+                FicheAuteur frm = new FicheAuteur(2, AuteurSelectionne); // 2 Modification
+                frm.Text = "Modification de l'auteur " + AuteurSelectionne.Prenom;
                 frm.ShowDialog();
             }
         }
+
+        private void btn_Ajouter_Click(object sender, EventArgs e)
+        {
+            Auteur AuteurSelectionne = new Auteur();
+            if (AuteurSelectionne != null)
+            {
+                FicheAuteur frm = new FicheAuteur(3, AuteurSelectionne); // 3 Ajout
+                frm.ShowDialog();
+            }
+        }
+
+        private void btn_Supprimer_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Voulez vous vraiment supprimer cet auteur ?", "Confirmation", MessageBoxButtons.YesNo);
+            if(result == DialogResult.Yes)
+            {
+                Auteur AuteurSelectionne = new Auteur();
+                DataGridViewRow ligne = dgv_ListeAuteurs.SelectedRows[0];
+                AuteurSelectionne = ligne.DataBoundItem as Auteur;
+                if (AuteurSelectionne != null)
+                {
+                    ManagerAuteur.SupprimerAuteur(AuteurSelectionne);
+                    MessageBox.Show("L'auteur a bien été supprimer !");
+                }
+            }
+
+        }
+
     }
 }

@@ -8,96 +8,55 @@ using MySql.Data.MySqlClient;
 
 namespace PPE4_ADO_Csharp
 {
-    public class ManagerAuteur
+    public class ManagerLivre
     {
-        public static Auteur DonneAuteurDuReader(MySqlDataReader monReader)
+        public static Livre DonneLivreDuReader(MySqlDataReader monReader)
         {
-            Auteur unAuteur = new Auteur();
-            unAuteur.Num = Convert.ToInt16(monReader["num"]);
-            unAuteur.Nom = monReader["nom"] == DBNull.Value ? "" : monReader["nom"] as string; // If ternaire
-            unAuteur.Prenom = monReader["prenom"] == DBNull.Value ? "" : monReader["prenom"] as string; // If ternaire
-            unAuteur.Nationalite = monReader["nationalite"] == DBNull.Value ? "" : monReader["nationalite"] as string; // If ternaire
-            return unAuteur;
+            Livre unLivre = new Livre();
+            unLivre.Num = Convert.ToInt16(monReader["num"]);
+            unLivre.Isbn = monReader["isbn"] == DBNull.Value ? "" : monReader["isbn"] as string; // If ternaire
+            unLivre.Titre = monReader["titre"] == DBNull.Value ? "" : monReader["titre"] as string; // If ternaire
+            unLivre.Prix = Convert.ToInt16(monReader["prix"]);
+            unLivre.Editeur = monReader["editeur"] == DBNull.Value ? "" : monReader["editeur"] as string; // If ternaire
+            unLivre.Annee = Convert.ToInt16(monReader["annee"]);
+            unLivre.Langue = monReader["langue"] == DBNull.Value ? "" : monReader["langue"] as string; // If ternaire
+            unLivre.UnAuteur = ManagerAuteur.DonneAuteurParId(Convert.ToInt16(monReader["numAuteur"]));
+            return unLivre;
         }
 
-        public static List<Auteur> DonneAuteurs()
+        public static List<Livre> DonneLivres()
         {
-            List<Auteur> lesAuteurs = new List<Auteur>();
+            List<Livre> lesLivres = new List<Livre>();
             MySqlCommand maRequete;
             MySqlDataReader monReader;
             Connection.MaConnection.Open(); // connexion a la bdd
             maRequete = Connection.MaConnection.CreateCommand(); // Pour faire une requete
-            maRequete.CommandText = "select * from auteur order by nom"; // Requete sql
+            maRequete.CommandText = "select * from livre order by titre"; // Requete sql
             monReader = maRequete.ExecuteReader(); // Permet d'executer la requete
             while (monReader.Read()) // Tant qu'il lis quelque chose
             {
-                Auteur unAuteur = ManagerAuteur.DonneAuteurDuReader(monReader);
-                lesAuteurs.Add(unAuteur);
+                Livre unLivre = ManagerLivre.DonneLivreDuReader(monReader);
+                lesLivres.Add(unLivre);
             }
             monReader.Close();
             Connection.MaConnection.Close(); // Ferme la connexion
-            return lesAuteurs;
+            return lesLivres;
         }
 
-        public static Auteur DonneAuteurParId(int id)
+        public static Livre DonneLivreParId(int id)
         {
-            MySqlCommand maRequete;
-            MySqlDataReader monReader;
+            Livre unLivre = new Livre();
 
-            maRequete = Connection.MaConnection.CreateCommand(); // Pour faire une requete
-            maRequete.CommandText = "select * from auteur where num='"+id+"'"; // Requete sql
-            monReader = maRequete.ExecuteReader(); // Permet d'executer la requete
-            monReader.Read();
-            Auteur auteur = new Auteur(Convert.ToInt16(monReader["num"]), monReader["prenom"] as string, monReader["nom"] as string, monReader["nationalite"] as string);
-            Connection.MaConnection.Close(); // Ferme la connexion
-
-            return auteur;
-
-
+            return unLivre;
         }
 
-        public static bool ModifierAuteur(Auteur a)
+        public static bool ModifierLivre(Livre l)
         {
             MySqlCommand maRequete;
             bool result = false;
             maRequete = Connection.MaConnection.CreateCommand();
-            maRequete.CommandText = "update auteur set " +
-                "nom='"+a.Nom+"', prenom='"+a.Prenom+"', nationalite='"+a.Nationalite+"' where num='"+a.Num+"'";
-            maRequete.Parameters.Clear();
-            maRequete.Parameters.AddWithValue("@paramNom", a.Nom);
-            maRequete.Parameters.AddWithValue("@paramPrenom", a.Prenom);
-            maRequete.Parameters.AddWithValue("@paramNation", a.Nationalite);
-            maRequete.Parameters.AddWithValue("@paramNumAuteur", a.Num);
-
-            try
-            {
-                Connection.MaConnection.Open();
-                int resultat = maRequete.ExecuteNonQuery();
-                Connection.MaConnection.Close();
-                if (resultat > 0)
-                {
-                    result = true;
-                }
-                else
-                {
-                    throw new Exception("Une erreur s'est produite !");
-                }
-                return result;
-
-            }
-            catch (Exception ex)
-            {
-
-                throw new Exception(ex.Message);
-            }
-        }
-
-        public static bool AjouterAuteur(Auteur a)
-        {
-            bool result = false;
-            MySqlCommand maRequete;
-            maRequete = Connection.MaConnection.CreateCommand();
-            maRequete.CommandText = "insert into auteur (nom, prenom, nationalite) values ('"+a.Nom+"', '"+a.Prenom+"', '"+a.Nationalite+"')";
+            maRequete.CommandText = "update livre set " +
+                "isbn='"+l.Isbn+"', titre='"+l.Titre+"', prix='"+l.Prix+"', editeur='"+l.Editeur+"', annee='"+l.Annee+"', langue='"+l.Langue+"', numAuteur='"+l.UnAuteur+"', numGenre='"+l.UnGenre+"' where num='" + l.Num + "'";
             maRequete.Parameters.Clear();
 
             try
@@ -123,12 +82,43 @@ namespace PPE4_ADO_Csharp
             }
         }
 
-        public static bool SupprimerAuteur(Auteur a)
+        public static bool AjouterLivre(Livre l)
         {
             bool result = false;
             MySqlCommand maRequete;
             maRequete = Connection.MaConnection.CreateCommand();
-            maRequete.CommandText = "delete from auteur where num='"+a.Num+"'";
+            maRequete.CommandText = "insert into livre (isbn, titre, prix, editeur, annee, langue, numAuteur, numGenre) values ('" + l.Isbn + "', '" + l.Titre + "', '" + l.Prix + "', '" + l.Editeur + "', '" + l.Annee + "', '" + l.Langue + "', '" + l.UnAuteur + "', '"+l.UnGenre+"')";
+            maRequete.Parameters.Clear();
+
+            try
+            {
+                Connection.MaConnection.Open();
+                int resultat = maRequete.ExecuteNonQuery();
+                Connection.MaConnection.Close();
+                if (resultat > 0)
+                {
+                    result = true;
+                }
+                else
+                {
+                    throw new Exception("Une erreur s'est produite !");
+                }
+                return result;
+
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public static bool SupprimerLivre(Livre l)
+        {
+            bool result = false;
+            MySqlCommand maRequete;
+            maRequete = Connection.MaConnection.CreateCommand();
+            maRequete.CommandText = "delete from livre where num='" + l.Num + "'";
             maRequete.Parameters.Clear();
 
             try

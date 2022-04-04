@@ -29,6 +29,7 @@ namespace PPE4_ADO_Csharp
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.label_Num = new System.Windows.Forms.Label();
             this.label_Nom = new System.Windows.Forms.Label();
             this.label_Prenom = new System.Windows.Forms.Label();
@@ -39,6 +40,8 @@ namespace PPE4_ADO_Csharp
             this.btn_Annuler = new System.Windows.Forms.Button();
             this.btn_Valider = new System.Windows.Forms.Button();
             this.cb_Nation = new System.Windows.Forms.ComboBox();
+            this.bs = new System.Windows.Forms.BindingSource(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.bs)).BeginInit();
             this.SuspendLayout();
             // 
             // label_Num
@@ -79,6 +82,7 @@ namespace PPE4_ADO_Csharp
             // 
             // tb_Num
             // 
+            this.tb_Num.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bs, "Num", true));
             this.tb_Num.Enabled = false;
             this.tb_Num.Location = new System.Drawing.Point(122, 30);
             this.tb_Num.Name = "tb_Num";
@@ -87,6 +91,7 @@ namespace PPE4_ADO_Csharp
             // 
             // tb_Nom
             // 
+            this.tb_Nom.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bs, "Nom", true));
             this.tb_Nom.Location = new System.Drawing.Point(122, 70);
             this.tb_Nom.Name = "tb_Nom";
             this.tb_Nom.Size = new System.Drawing.Size(133, 20);
@@ -94,6 +99,7 @@ namespace PPE4_ADO_Csharp
             // 
             // tb_Prenom
             // 
+            this.tb_Prenom.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bs, "Prenom", true));
             this.tb_Prenom.Location = new System.Drawing.Point(122, 114);
             this.tb_Prenom.Name = "tb_Prenom";
             this.tb_Prenom.Size = new System.Drawing.Size(133, 20);
@@ -121,17 +127,22 @@ namespace PPE4_ADO_Csharp
             // 
             // cb_Nation
             // 
+            this.cb_Nation.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bs, "Nationalite", true));
             this.cb_Nation.FormattingEnabled = true;
             this.cb_Nation.Location = new System.Drawing.Point(122, 164);
             this.cb_Nation.Name = "cb_Nation";
             this.cb_Nation.Size = new System.Drawing.Size(133, 21);
             this.cb_Nation.TabIndex = 10;
             // 
+            // bs
+            // 
+            this.bs.DataSource = typeof(PPE4_ADO_Csharp.Auteur);
+            // 
             // FicheAuteur
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(307, 264);
+            this.ClientSize = new System.Drawing.Size(320, 264);
             this.Controls.Add(this.cb_Nation);
             this.Controls.Add(this.btn_Valider);
             this.Controls.Add(this.btn_Annuler);
@@ -142,8 +153,10 @@ namespace PPE4_ADO_Csharp
             this.Controls.Add(this.label_Prenom);
             this.Controls.Add(this.label_Nom);
             this.Controls.Add(this.label_Num);
+            this.MaximizeBox = false;
             this.Name = "FicheAuteur";
             this.Text = "FicheAuteur";
+            ((System.ComponentModel.ISupportInitialize)(this.bs)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -161,5 +174,6 @@ namespace PPE4_ADO_Csharp
         private System.Windows.Forms.Button btn_Annuler;
         private System.Windows.Forms.Button btn_Valider;
         private System.Windows.Forms.ComboBox cb_Nation;
+        private System.Windows.Forms.BindingSource bs;
     }
 }

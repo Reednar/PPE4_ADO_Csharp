@@ -15,39 +15,29 @@ namespace PPE4_ADO_Csharp
     {
         private MySqlCommand maRequete;
         private MySqlDataReader monReader;
-        private int numAuteur;
+        Auteur AuteurCourant = new Auteur();
 
-        public FicheAuteur(bool modification, int numero)
+        public FicheAuteur(int modification, Auteur monAuteur=null)
         {
             InitializeComponent();
-            numAuteur = numero;
             RemplirComboNationalite();
             try
             {
-                Connection.MaConnection.Open(); // Ouvre la connexion
-                maRequete = Connection.MaConnection.CreateCommand(); // Pour faire une requete
-                maRequete.CommandText = "select a.nom, a.prenom, a.num, a.nationalite from auteur a where a.num="+numero+""; // Requete sql
-                maRequete.Prepare(); // Prepare la requete
-                maRequete.Parameters.AddWithValue("@paramNum", numero); // Ajoute le parametre num
-                monReader = maRequete.ExecuteReader();
-
-                if (monReader.Read())
+                if (monAuteur != null)
                 {
-                    tb_Num.Text = numero.ToString();
-                    tb_Nom.Text = monReader["nom"].ToString();
-                    tb_Prenom.Text = monReader["prenom"].ToString();
-                    cb_Nation.Text = monReader["nationalite"].ToString();
+                    AuteurCourant = monAuteur;
                 }
-                else
-                {
-                    MessageBox.Show("Erreur : L'auteur n'a pas été trouvé");
-                }
-
-                if (modification == false)
+                bs.DataSource = AuteurCourant;
+                
+                if (modification == 0)
                 {
                     tb_Nom.Enabled = false;
                     tb_Prenom.Enabled = false;
                     cb_Nation.Enabled = false;
+                }
+                else if(modification == 3){
+                    tb_Num.Visible = false;
+                    label_Num.Visible = false;
                 }
             }
             catch (Exception ex)
@@ -55,12 +45,7 @@ namespace PPE4_ADO_Csharp
 
                 MessageBox.Show("Erreur : " + ex.Message);
             }
-            finally
-            {
-                monReader.Close();
-                Connection.MaConnection.Close(); // Ferme la connexion
-                                      
-            }
+
         }
 
         private void RemplirComboNationalite()
@@ -77,6 +62,7 @@ namespace PPE4_ADO_Csharp
             cb_Nation.DataSource = dt; // Source de la combo = datatable
             cb_Nation.DisplayMember = "nationalite"; // Colonne qui sera affichée dans la combo
             cb_Nation.ValueMember = "nationalite"; // Colonne qui sera memorisée lorsque l'on selectionnera un élément de la liste
+            Connection.MaConnection.Close();
 
         }
 
@@ -87,41 +73,31 @@ namespace PPE4_ADO_Csharp
 
         private void btn_Valider_Click(object sender, EventArgs e)
         {
-            if(ControleSaisies() == true)
+            try
             {
-                maRequete = Connection.MaConnection.CreateCommand();
-                maRequete.CommandText = "update auteur set " +
-                    "nom='"+tb_Nom.Text+"', prenom='"+tb_Prenom.Text+"', nationalite='"+cb_Nation.Text+"' where num='"+numAuteur+"'";
-                maRequete.Parameters.Clear();
-                maRequete.Parameters.AddWithValue("@paramNom", tb_Nom.Text);
-                maRequete.Parameters.AddWithValue("@paramPrenom", tb_Prenom.Text);
-                maRequete.Parameters.AddWithValue("@paramNation", cb_Nation.Text);
-                maRequete.Parameters.AddWithValue("@paramNumAuteur", numAuteur);
-
-                try
+                if (ControleSaisies() == true)
                 {
-                    Connection.MaConnection.Open();
-                    int resultat = maRequete.ExecuteNonQuery();
-                    if (resultat > 0)
+                    if (AuteurCourant.Num == 0)
                     {
-                        MessageBox.Show("L'auteur a bien été modifié !");
+                        AuteurCourant = bs.Current as Auteur;
+                        bool reponse = ManagerAuteur.AjouterAuteur(AuteurCourant);
+                        MessageBox.Show("L'auteur " + AuteurCourant.Prenom + " a bien été ajouter !");
                     }
                     else
                     {
-                        MessageBox.Show("Une erreur s'est produite !");
-                    }
-                }
-                catch (Exception ex)
-                {
+                        AuteurCourant = bs.Current as Auteur;
+                        bool reponse = ManagerAuteur.ModifierAuteur(AuteurCourant);
+                        MessageBox.Show("L'auteur " + AuteurCourant.Prenom + " a bien été modifier !");
 
-                    MessageBox.Show(ex.Message);
-                }
-                finally
-                {
-                    monReader.Close();
-                    Connection.MaConnection.Close(); // Ferme la connexion
+                    }
+                    this.Close();
                 }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            
         }
 
         private bool ControleSaisies()

@@ -27,5 +27,23 @@ namespace PPE4_ADO_Csharp
             Form_ListeAuteurs frm = new Form_ListeAuteurs();
             frm.Show();
         }
+
+        private void genresToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form_ListeGenres frm = new Form_ListeGenres();
+            frm.Show();
+        }
+
+        private void adhérentsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form_ListeAdherents frm = new Form_ListeAdherents();
+            frm.Show();
+        }
+
+        private void livresToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form_ListeLivres frm = new Form_ListeLivres();
+            frm.Show();
+        }
     }
 }

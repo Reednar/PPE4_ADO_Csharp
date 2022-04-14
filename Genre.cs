@@ -9,9 +9,24 @@ namespace PPE4_ADO_Csharp
     public class Genre
     {
         private int num;
-        private string libelle;
+        private string libelle= "";
 
         public string Libelle { get => libelle; set => libelle = value; }
         public int Num { get => num; set => num = value; }
+
+        public Genre(string unLibelle)
+        {
+            this.Libelle = unLibelle;
+        }
+
+        public Genre()
+        {
+
+        }
+
+        public override string ToString()
+        {
+            return this.Libelle.ToString();
+        }
     }
 }

@@ -30,7 +30,6 @@ namespace PPE4_ADO_Csharp
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.bs = new System.Windows.Forms.BindingSource(this.components);
             this.btn_Valider = new System.Windows.Forms.Button();
             this.btn_Annuler = new System.Windows.Forms.Button();
             this.tb_Titre = new System.Windows.Forms.TextBox();
@@ -45,12 +44,13 @@ namespace PPE4_ADO_Csharp
             this.label_Editeur = new System.Windows.Forms.Label();
             this.tb_Annee = new System.Windows.Forms.TextBox();
             this.label_Annee = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.tb_Langue = new System.Windows.Forms.TextBox();
             this.label_Langue = new System.Windows.Forms.Label();
             this.label_Auteur = new System.Windows.Forms.Label();
             this.label_Genre = new System.Windows.Forms.Label();
             this.cb_Auteur = new System.Windows.Forms.ComboBox();
             this.cb_Genre = new System.Windows.Forms.ComboBox();
+            this.bs = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.bs)).BeginInit();
             this.SuspendLayout();
             // 
@@ -62,6 +62,7 @@ namespace PPE4_ADO_Csharp
             this.btn_Valider.TabIndex = 19;
             this.btn_Valider.Text = "Valider";
             this.btn_Valider.UseVisualStyleBackColor = true;
+            this.btn_Valider.Click += new System.EventHandler(this.btn_Valider_Click_1);
             // 
             // btn_Annuler
             // 
@@ -71,10 +72,11 @@ namespace PPE4_ADO_Csharp
             this.btn_Annuler.TabIndex = 18;
             this.btn_Annuler.Text = "Annuler";
             this.btn_Annuler.UseVisualStyleBackColor = true;
+            this.btn_Annuler.Click += new System.EventHandler(this.btn_Annuler_Click_1);
             // 
             // tb_Titre
             // 
-            this.tb_Titre.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bs, "Prenom", true));
+            this.tb_Titre.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bs, "Titre", true));
             this.tb_Titre.Location = new System.Drawing.Point(123, 122);
             this.tb_Titre.Name = "tb_Titre";
             this.tb_Titre.Size = new System.Drawing.Size(133, 20);
@@ -82,7 +84,7 @@ namespace PPE4_ADO_Csharp
             // 
             // tb_Isbn
             // 
-            this.tb_Isbn.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bs, "Nom", true));
+            this.tb_Isbn.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bs, "Isbn", true));
             this.tb_Isbn.Location = new System.Drawing.Point(123, 78);
             this.tb_Isbn.Name = "tb_Isbn";
             this.tb_Isbn.Size = new System.Drawing.Size(133, 20);
@@ -135,7 +137,7 @@ namespace PPE4_ADO_Csharp
             // 
             // tb_Prix
             // 
-            this.tb_Prix.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bs, "Prenom", true));
+            this.tb_Prix.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bs, "Prix", true));
             this.tb_Prix.Location = new System.Drawing.Point(123, 172);
             this.tb_Prix.Name = "tb_Prix";
             this.tb_Prix.Size = new System.Drawing.Size(133, 20);
@@ -143,7 +145,7 @@ namespace PPE4_ADO_Csharp
             // 
             // tb_Editeur
             // 
-            this.tb_Editeur.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bs, "Prenom", true));
+            this.tb_Editeur.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bs, "Editeur", true));
             this.tb_Editeur.Location = new System.Drawing.Point(123, 216);
             this.tb_Editeur.Name = "tb_Editeur";
             this.tb_Editeur.Size = new System.Drawing.Size(133, 20);
@@ -160,7 +162,7 @@ namespace PPE4_ADO_Csharp
             // 
             // tb_Annee
             // 
-            this.tb_Annee.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bs, "Prenom", true));
+            this.tb_Annee.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bs, "Annee", true));
             this.tb_Annee.Location = new System.Drawing.Point(123, 270);
             this.tb_Annee.Name = "tb_Annee";
             this.tb_Annee.Size = new System.Drawing.Size(133, 20);
@@ -175,13 +177,13 @@ namespace PPE4_ADO_Csharp
             this.label_Annee.TabIndex = 23;
             this.label_Annee.Text = "Année";
             // 
-            // textBox1
+            // tb_Langue
             // 
-            this.textBox1.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bs, "Prenom", true));
-            this.textBox1.Location = new System.Drawing.Point(123, 320);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(133, 20);
-            this.textBox1.TabIndex = 26;
+            this.tb_Langue.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.bs, "Langue", true));
+            this.tb_Langue.Location = new System.Drawing.Point(123, 320);
+            this.tb_Langue.Name = "tb_Langue";
+            this.tb_Langue.Size = new System.Drawing.Size(133, 20);
+            this.tb_Langue.TabIndex = 26;
             // 
             // label_Langue
             // 
@@ -226,6 +228,10 @@ namespace PPE4_ADO_Csharp
             this.cb_Genre.Size = new System.Drawing.Size(133, 21);
             this.cb_Genre.TabIndex = 31;
             // 
+            // bs
+            // 
+            this.bs.DataSource = typeof(PPE4_ADO_Csharp.Livre);
+            // 
             // FicheLivre
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -235,7 +241,7 @@ namespace PPE4_ADO_Csharp
             this.Controls.Add(this.cb_Auteur);
             this.Controls.Add(this.label_Genre);
             this.Controls.Add(this.label_Auteur);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.tb_Langue);
             this.Controls.Add(this.label_Langue);
             this.Controls.Add(this.tb_Annee);
             this.Controls.Add(this.label_Annee);
@@ -252,6 +258,7 @@ namespace PPE4_ADO_Csharp
             this.Controls.Add(this.label_Isbn);
             this.Controls.Add(this.label_Num);
             this.Name = "FicheLivre";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FicheLivre";
             ((System.ComponentModel.ISupportInitialize)(this.bs)).EndInit();
             this.ResumeLayout(false);
@@ -276,7 +283,7 @@ namespace PPE4_ADO_Csharp
         private System.Windows.Forms.Label label_Editeur;
         private System.Windows.Forms.TextBox tb_Annee;
         private System.Windows.Forms.Label label_Annee;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox tb_Langue;
         private System.Windows.Forms.Label label_Langue;
         private System.Windows.Forms.Label label_Auteur;
         private System.Windows.Forms.Label label_Genre;

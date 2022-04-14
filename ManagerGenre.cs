@@ -40,7 +40,19 @@ namespace PPE4_ADO_Csharp
         public static Genre DonneGenreParId(int id)
         {
             Genre unGenre = new Genre();
-
+            MySqlCommand maRequete;
+            MySqlDataReader monReader;
+            Connection.MaConnection2.Open(); // connexion a la bdd
+            maRequete = Connection.MaConnection2.CreateCommand(); // Pour faire une requete
+            maRequete.CommandText = "select num, libelle from genre where num='" + id + "'"; // Requete sql
+            monReader = maRequete.ExecuteReader(); // Permet d'executer la requete
+            while (monReader.Read()) // Tant qu'il lis quelque chose
+            {
+                unGenre.Num = Convert.ToInt16(monReader["num"]);
+                unGenre.Libelle = monReader["libelle"] == DBNull.Value ? "" : monReader["libelle"] as string; // If ternaire
+            }
+            monReader.Close();
+            Connection.MaConnection2.Close(); // Ferme la connexion
             return unGenre;
         }
 

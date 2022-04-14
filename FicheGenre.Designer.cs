@@ -112,6 +112,7 @@ namespace PPE4_ADO_Csharp
             this.Controls.Add(this.label_Num);
             this.MaximizeBox = false;
             this.Name = "FicheGenre";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FicheGenre";
             ((System.ComponentModel.ISupportInitialize)(this.bs)).EndInit();
             this.ResumeLayout(false);

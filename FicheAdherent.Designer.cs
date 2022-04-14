@@ -33,6 +33,7 @@ namespace PPE4_ADO_Csharp
             this.btn_Valider = new System.Windows.Forms.Button();
             this.btn_Annuler = new System.Windows.Forms.Button();
             this.tb_Prenom = new System.Windows.Forms.TextBox();
+            this.bs = new System.Windows.Forms.BindingSource(this.components);
             this.tb_Nom = new System.Windows.Forms.TextBox();
             this.tb_Num = new System.Windows.Forms.TextBox();
             this.label_Rue = new System.Windows.Forms.Label();
@@ -48,7 +49,6 @@ namespace PPE4_ADO_Csharp
             this.label_Tel = new System.Windows.Forms.Label();
             this.tb_Mel = new System.Windows.Forms.TextBox();
             this.label_Mel = new System.Windows.Forms.Label();
-            this.bs = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.bs)).BeginInit();
             this.SuspendLayout();
             // 
@@ -79,6 +79,10 @@ namespace PPE4_ADO_Csharp
             this.tb_Prenom.Name = "tb_Prenom";
             this.tb_Prenom.Size = new System.Drawing.Size(133, 20);
             this.tb_Prenom.TabIndex = 17;
+            // 
+            // bs
+            // 
+            this.bs.DataSource = typeof(PPE4_ADO_Csharp.Adherent);
             // 
             // tb_Nom
             // 
@@ -209,10 +213,6 @@ namespace PPE4_ADO_Csharp
             this.label_Mel.TabIndex = 27;
             this.label_Mel.Text = "Email";
             // 
-            // bs
-            // 
-            this.bs.DataSource = typeof(PPE4_ADO_Csharp.Adherent);
-            // 
             // FicheAdherent
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -238,6 +238,7 @@ namespace PPE4_ADO_Csharp
             this.Controls.Add(this.label_Num);
             this.MaximizeBox = false;
             this.Name = "FicheAdherent";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FicheAdherent";
             ((System.ComponentModel.ISupportInitialize)(this.bs)).EndInit();
             this.ResumeLayout(false);

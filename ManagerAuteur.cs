@@ -25,9 +25,9 @@ namespace PPE4_ADO_Csharp
             List<Auteur> lesAuteurs = new List<Auteur>();
             MySqlCommand maRequete;
             MySqlDataReader monReader;
+            Connection.MaConnection.Open(); // connexion a la bdd
             maRequete = Connection.MaConnection.CreateCommand(); // Pour faire une requete
             maRequete.CommandText = "select * from auteur order by nom"; // Requete sql
-            Connection.MaConnection.Open(); // connexion a la bdd
             monReader = maRequete.ExecuteReader(); // Permet d'executer la requete
             while (monReader.Read()) // Tant qu'il lis quelque chose
             {

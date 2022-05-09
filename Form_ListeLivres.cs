@@ -46,7 +46,7 @@ namespace PPE4_ADO_Csharp
             LivreSelectionne = ligne.DataBoundItem as Livre;
             if (LivreSelectionne != null)
             {
-                FicheLivre frm = new FicheLivre(0, LivreSelectionne); // 1 Affichage
+                FicheLivre frm = new FicheLivre(0, LivreSelectionne); // 0 Affichage
                 frm.Text = "Fiche livre de " + LivreSelectionne.Titre;
                 frm.ShowDialog();
             }
@@ -83,13 +83,10 @@ namespace PPE4_ADO_Csharp
 
         private void btn_Ajouter_Click(object sender, EventArgs e)
         {
-            Livre LivreSelectionne = new Livre();
-            if (LivreSelectionne != null)
-            {
-                FicheLivre frm = new FicheLivre(3, LivreSelectionne); // 3 Ajout
+
+                FicheLivre frm = new FicheLivre(3); // 3 Ajout
                 frm.Text = "Ajout d'un livre";
                 frm.ShowDialog();
-            }
         }
     }
 }

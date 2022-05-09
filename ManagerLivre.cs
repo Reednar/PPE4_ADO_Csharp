@@ -57,7 +57,7 @@ namespace PPE4_ADO_Csharp
             bool result = false;
             maRequete = Connection.MaConnection.CreateCommand();
             maRequete.CommandText = "update livre set " +
-                "isbn='"+l.Isbn+"', titre='"+l.Titre+"', prix='"+l.Prix+"', editeur='"+l.Editeur+"', annee='"+l.Annee+"', langue='"+l.Langue+"', numAuteur='"+l.GetNumAuteur() +"', numGenre='"+l.GetNumGenre() +"' where num='" + l.Num + "'";
+                "isbn='"+l.Isbn+"', titre='"+l.Titre+"', prix='"+l.Prix+"', editeur='"+l.Editeur+"', annee='"+l.Annee+"', langue='"+l.Langue+"', numAuteur='"+l.UnAuteur.Num +"', numGenre='"+l.UnGenre.Num +"' where num='" + l.Num + "'";
             maRequete.Parameters.Clear();
 
             try
@@ -92,7 +92,7 @@ namespace PPE4_ADO_Csharp
             bool result = false;
             MySqlCommand maRequete;
             maRequete = Connection.MaConnection.CreateCommand();
-            maRequete.CommandText = "insert into livre (isbn, titre, prix, editeur, annee, langue, numAuteur, numGenre) values ('" + l.Isbn + "', '" + l.Titre + "', '" + l.Prix + "', '" + l.Editeur + "', '" + l.Annee + "', '" + l.Langue + "', '" + l.GetNumAuteur() + "', '"+l.GetNumGenre()+ "')";
+            maRequete.CommandText = "insert into livre (isbn, titre, prix, editeur, annee, langue, numAuteur, numGenre) values ('" + l.Isbn + "', '" + l.Titre + "', '" + l.Prix + "', '" + l.Editeur + "', '" + l.Annee + "', '" + l.Langue + "', '" + l.UnAuteur.Num + "', '"+l.UnGenre.Num+ "')";
             maRequete.Parameters.Clear();
 
             try

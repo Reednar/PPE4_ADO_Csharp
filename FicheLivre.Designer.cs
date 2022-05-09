@@ -33,6 +33,7 @@ namespace PPE4_ADO_Csharp
             this.btn_Valider = new System.Windows.Forms.Button();
             this.btn_Annuler = new System.Windows.Forms.Button();
             this.tb_Titre = new System.Windows.Forms.TextBox();
+            this.bs = new System.Windows.Forms.BindingSource(this.components);
             this.tb_Isbn = new System.Windows.Forms.TextBox();
             this.tb_Num = new System.Windows.Forms.TextBox();
             this.label_Prix = new System.Windows.Forms.Label();
@@ -50,8 +51,11 @@ namespace PPE4_ADO_Csharp
             this.label_Genre = new System.Windows.Forms.Label();
             this.cb_Auteur = new System.Windows.Forms.ComboBox();
             this.cb_Genre = new System.Windows.Forms.ComboBox();
-            this.bs = new System.Windows.Forms.BindingSource(this.components);
+            this.genreBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.auteurBindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.bs)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.genreBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.auteurBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // btn_Valider
@@ -81,6 +85,10 @@ namespace PPE4_ADO_Csharp
             this.tb_Titre.Name = "tb_Titre";
             this.tb_Titre.Size = new System.Drawing.Size(133, 20);
             this.tb_Titre.TabIndex = 17;
+            // 
+            // bs
+            // 
+            this.bs.DataSource = typeof(PPE4_ADO_Csharp.Livre);
             // 
             // tb_Isbn
             // 
@@ -214,6 +222,8 @@ namespace PPE4_ADO_Csharp
             // 
             // cb_Auteur
             // 
+            this.cb_Auteur.DataBindings.Add(new System.Windows.Forms.Binding("SelectedItem", this.bs, "UnAuteur", true));
+            this.cb_Auteur.DataSource = this.auteurBindingSource;
             this.cb_Auteur.FormattingEnabled = true;
             this.cb_Auteur.Location = new System.Drawing.Point(123, 366);
             this.cb_Auteur.Name = "cb_Auteur";
@@ -222,15 +232,21 @@ namespace PPE4_ADO_Csharp
             // 
             // cb_Genre
             // 
+            this.cb_Genre.DataBindings.Add(new System.Windows.Forms.Binding("SelectedItem", this.bs, "UnGenre", true));
+            this.cb_Genre.DataSource = this.genreBindingSource;
             this.cb_Genre.FormattingEnabled = true;
             this.cb_Genre.Location = new System.Drawing.Point(123, 417);
             this.cb_Genre.Name = "cb_Genre";
             this.cb_Genre.Size = new System.Drawing.Size(133, 21);
             this.cb_Genre.TabIndex = 31;
             // 
-            // bs
+            // genreBindingSource
             // 
-            this.bs.DataSource = typeof(PPE4_ADO_Csharp.Livre);
+            this.genreBindingSource.DataSource = typeof(PPE4_ADO_Csharp.Genre);
+            // 
+            // auteurBindingSource
+            // 
+            this.auteurBindingSource.DataSource = typeof(PPE4_ADO_Csharp.Auteur);
             // 
             // FicheLivre
             // 
@@ -261,6 +277,8 @@ namespace PPE4_ADO_Csharp
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FicheLivre";
             ((System.ComponentModel.ISupportInitialize)(this.bs)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.genreBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.auteurBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -289,5 +307,7 @@ namespace PPE4_ADO_Csharp
         private System.Windows.Forms.Label label_Genre;
         private System.Windows.Forms.ComboBox cb_Auteur;
         private System.Windows.Forms.ComboBox cb_Genre;
+        private System.Windows.Forms.BindingSource auteurBindingSource;
+        private System.Windows.Forms.BindingSource genreBindingSource;
     }
 }

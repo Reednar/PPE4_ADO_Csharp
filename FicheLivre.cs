@@ -20,14 +20,39 @@ namespace PPE4_ADO_Csharp
         public FicheLivre(int modification, Livre monLivre = null)
         {
             InitializeComponent();
-            RemplirComboAuteur();
-            RemplirComboGenre();
- 
+            auteurBindingSource.DataSource = ManagerAuteur.DonneAuteurs(); // Auteurs par nom
+
+            genreBindingSource.DataSource = ManagerGenre.DonneGenres(); // Genres par libelle
+
             try
             {
                 if (monLivre != null)
                 {
                     LivreCourant = monLivre;
+
+                    // Pour chaque auteur
+                    foreach (Auteur a in cb_Auteur.Items)
+                    {
+                        // Si c'est l'auteur du livre
+                        if (LivreCourant.UnAuteur.Num == a.Num)
+                        {
+                            // Le selectionner par défaut
+                            cb_Auteur.SelectedItem = a;
+                            break; // Stopper la boucle
+                        }
+                    }
+
+                    // Pour chaque genre
+                    foreach (Genre g in cb_Genre.Items)
+                    {
+                        // Si c'est le genre du livre
+                        if (LivreCourant.UnGenre.Num == g.Num)
+                        {
+                            // Le selectionner par défaut
+                            cb_Genre.SelectedItem = g;
+                            break; // Stopper la boucle
+                        }
+                    }
                 }
                 bs.DataSource = LivreCourant;
 

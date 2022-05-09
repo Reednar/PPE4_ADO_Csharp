@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MySql.Data.MySqlClient;
 
 namespace PPE4_ADO_Csharp
 {
@@ -27,5 +28,17 @@ namespace PPE4_ADO_Csharp
         public string Langue { get => langue; set => langue = value; }
         public Auteur UnAuteur { get => unAuteur; set => unAuteur = value; }
         public Genre UnGenre { get => unGenre; set => unGenre = value; }
+
+        public int GetNumAuteur()
+        {
+            return UnAuteur.Num;
+        }
+
+        public int GetNumGenre()
+        {
+            return UnGenre.Num;
+        }
+
+
     }
 }

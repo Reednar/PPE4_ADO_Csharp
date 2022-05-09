@@ -56,7 +56,7 @@ namespace PPE4_ADO_Csharp
             bool result = false;
             maRequete = Connection.MaConnection.CreateCommand();
             maRequete.CommandText = "update adherent set " +
-                "nom='" + a.Nom + "', prenom='" + a.Prenom + "', adrRue='" + a.AdrRue + "', adrCP='" + a.AdrCP + "', adrVile='" + a.AdrVille + "', tel='" + a.Tel + "', mel='" + a.Mel + "' where num='" + a.Num + "'";
+                "nom='" + a.Nom + "', prenom='" + a.Prenom + "', adrRue='" + a.AdrRue + "', adrCP='" + a.AdrCP + "', adrVille='" + a.AdrVille + "', tel='" + a.Tel + "', mel='" + a.Mel + "' where num='" + a.Num + "'";
             maRequete.Parameters.Clear();
 
             try

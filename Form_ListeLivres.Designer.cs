@@ -37,7 +37,6 @@ namespace PPE4_ADO_Csharp
             this.dgv_ListeLivres = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.bs = new System.Windows.Forms.BindingSource(this.components);
             this.numDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.isbnDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.titreDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -47,6 +46,7 @@ namespace PPE4_ADO_Csharp
             this.langueDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.unAuteurDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.unGenreDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bs = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dgv_ListeLivres)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bs)).BeginInit();
             this.SuspendLayout();
@@ -60,6 +60,7 @@ namespace PPE4_ADO_Csharp
             this.btn_Ajouter.TabIndex = 14;
             this.btn_Ajouter.Text = "Ajouter";
             this.btn_Ajouter.UseVisualStyleBackColor = true;
+            this.btn_Ajouter.Click += new System.EventHandler(this.btn_Ajouter_Click);
             // 
             // btn_Supprimer
             // 
@@ -70,6 +71,7 @@ namespace PPE4_ADO_Csharp
             this.btn_Supprimer.TabIndex = 13;
             this.btn_Supprimer.Text = "Supprimer";
             this.btn_Supprimer.UseVisualStyleBackColor = true;
+            this.btn_Supprimer.Click += new System.EventHandler(this.btn_Supprimer_Click);
             // 
             // btn_Modifier
             // 
@@ -80,6 +82,7 @@ namespace PPE4_ADO_Csharp
             this.btn_Modifier.TabIndex = 12;
             this.btn_Modifier.Text = "Modifier";
             this.btn_Modifier.UseVisualStyleBackColor = true;
+            this.btn_Modifier.Click += new System.EventHandler(this.btn_Modifier_Click_1);
             // 
             // btn_Afficher
             // 
@@ -90,6 +93,7 @@ namespace PPE4_ADO_Csharp
             this.btn_Afficher.TabIndex = 11;
             this.btn_Afficher.Text = "Afficher";
             this.btn_Afficher.UseVisualStyleBackColor = true;
+            this.btn_Afficher.Click += new System.EventHandler(this.btn_Afficher_Click_1);
             // 
             // dgv_ListeLivres
             // 
@@ -131,19 +135,17 @@ namespace PPE4_ADO_Csharp
             this.dataGridViewTextBoxColumn2.HeaderText = "Genre";
             this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
             // 
-            // bs
-            // 
-            this.bs.DataSource = typeof(PPE4_ADO_Csharp.Livre);
-            // 
             // numDataGridViewTextBoxColumn
             // 
+            this.numDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.numDataGridViewTextBoxColumn.DataPropertyName = "Num";
-            this.numDataGridViewTextBoxColumn.HeaderText = "Num";
+            this.numDataGridViewTextBoxColumn.HeaderText = "Numéro";
             this.numDataGridViewTextBoxColumn.Name = "numDataGridViewTextBoxColumn";
             this.numDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // isbnDataGridViewTextBoxColumn
             // 
+            this.isbnDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.isbnDataGridViewTextBoxColumn.DataPropertyName = "Isbn";
             this.isbnDataGridViewTextBoxColumn.HeaderText = "Isbn";
             this.isbnDataGridViewTextBoxColumn.Name = "isbnDataGridViewTextBoxColumn";
@@ -151,6 +153,7 @@ namespace PPE4_ADO_Csharp
             // 
             // titreDataGridViewTextBoxColumn
             // 
+            this.titreDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.titreDataGridViewTextBoxColumn.DataPropertyName = "Titre";
             this.titreDataGridViewTextBoxColumn.HeaderText = "Titre";
             this.titreDataGridViewTextBoxColumn.Name = "titreDataGridViewTextBoxColumn";
@@ -158,6 +161,7 @@ namespace PPE4_ADO_Csharp
             // 
             // prixDataGridViewTextBoxColumn
             // 
+            this.prixDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.prixDataGridViewTextBoxColumn.DataPropertyName = "Prix";
             this.prixDataGridViewTextBoxColumn.HeaderText = "Prix";
             this.prixDataGridViewTextBoxColumn.Name = "prixDataGridViewTextBoxColumn";
@@ -165,6 +169,7 @@ namespace PPE4_ADO_Csharp
             // 
             // editeurDataGridViewTextBoxColumn
             // 
+            this.editeurDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.editeurDataGridViewTextBoxColumn.DataPropertyName = "Editeur";
             this.editeurDataGridViewTextBoxColumn.HeaderText = "Editeur";
             this.editeurDataGridViewTextBoxColumn.Name = "editeurDataGridViewTextBoxColumn";
@@ -172,6 +177,7 @@ namespace PPE4_ADO_Csharp
             // 
             // anneeDataGridViewTextBoxColumn
             // 
+            this.anneeDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.anneeDataGridViewTextBoxColumn.DataPropertyName = "Annee";
             this.anneeDataGridViewTextBoxColumn.HeaderText = "Annee";
             this.anneeDataGridViewTextBoxColumn.Name = "anneeDataGridViewTextBoxColumn";
@@ -179,6 +185,7 @@ namespace PPE4_ADO_Csharp
             // 
             // langueDataGridViewTextBoxColumn
             // 
+            this.langueDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.langueDataGridViewTextBoxColumn.DataPropertyName = "Langue";
             this.langueDataGridViewTextBoxColumn.HeaderText = "Langue";
             this.langueDataGridViewTextBoxColumn.Name = "langueDataGridViewTextBoxColumn";
@@ -186,17 +193,23 @@ namespace PPE4_ADO_Csharp
             // 
             // unAuteurDataGridViewTextBoxColumn
             // 
+            this.unAuteurDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.unAuteurDataGridViewTextBoxColumn.DataPropertyName = "UnAuteur";
-            this.unAuteurDataGridViewTextBoxColumn.HeaderText = "UnAuteur";
+            this.unAuteurDataGridViewTextBoxColumn.HeaderText = "Auteur";
             this.unAuteurDataGridViewTextBoxColumn.Name = "unAuteurDataGridViewTextBoxColumn";
             this.unAuteurDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // unGenreDataGridViewTextBoxColumn
             // 
+            this.unGenreDataGridViewTextBoxColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.unGenreDataGridViewTextBoxColumn.DataPropertyName = "UnGenre";
-            this.unGenreDataGridViewTextBoxColumn.HeaderText = "UnGenre";
+            this.unGenreDataGridViewTextBoxColumn.HeaderText = "Genre";
             this.unGenreDataGridViewTextBoxColumn.Name = "unGenreDataGridViewTextBoxColumn";
             this.unGenreDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // bs
+            // 
+            this.bs.DataSource = typeof(PPE4_ADO_Csharp.Livre);
             // 
             // Form_ListeLivres
             // 
@@ -209,6 +222,7 @@ namespace PPE4_ADO_Csharp
             this.Controls.Add(this.btn_Afficher);
             this.Controls.Add(this.dgv_ListeLivres);
             this.Name = "Form_ListeLivres";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form_ListeLivres";
             ((System.ComponentModel.ISupportInitialize)(this.dgv_ListeLivres)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bs)).EndInit();

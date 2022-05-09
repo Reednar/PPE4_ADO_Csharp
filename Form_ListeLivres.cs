@@ -35,11 +35,11 @@ namespace PPE4_ADO_Csharp
             }
             finally
             {
-
+                Connection.MaConnection.Close(); // Ferme la connexion
             }
         }
 
-        private void btn_Afficher_Click(object sender, EventArgs e)
+        private void btn_Afficher_Click_1(object sender, EventArgs e)
         {
             Livre LivreSelectionne = new Livre();
             DataGridViewRow ligne = dgv_ListeLivres.SelectedRows[0];
@@ -52,7 +52,7 @@ namespace PPE4_ADO_Csharp
             }
         }
 
-        private void btn_Modifier_Click(object sender, EventArgs e)
+        private void btn_Modifier_Click_1(object sender, EventArgs e)
         {
             Livre LivreSelectionne = new Livre();
             DataGridViewRow ligne = dgv_ListeLivres.SelectedRows[0];

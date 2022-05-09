@@ -25,9 +25,9 @@ namespace PPE4_ADO_Csharp
             List<Auteur> lesAuteurs = new List<Auteur>();
             MySqlCommand maRequete;
             MySqlDataReader monReader;
-            Connection.MaConnection.Open(); // connexion a la bdd
             maRequete = Connection.MaConnection.CreateCommand(); // Pour faire une requete
             maRequete.CommandText = "select * from auteur order by nom"; // Requete sql
+            Connection.MaConnection.Open(); // connexion a la bdd
             monReader = maRequete.ExecuteReader(); // Permet d'executer la requete
             while (monReader.Read()) // Tant qu'il lis quelque chose
             {
@@ -41,20 +41,25 @@ namespace PPE4_ADO_Csharp
 
         public static Auteur DonneAuteurParId(int id)
         {
+            Auteur unAuteur = new Auteur();
             MySqlCommand maRequete;
             MySqlDataReader monReader;
-
-            maRequete = Connection.MaConnection.CreateCommand(); // Pour faire une requete
-            maRequete.CommandText = "select * from auteur where num='"+id+"'"; // Requete sql
+            Connection.MaConnection2.Open(); // connexion a la bdd
+            maRequete = Connection.MaConnection2.CreateCommand(); // Pour faire une requete
+            maRequete.CommandText = "select num, nom from auteur where num='"+id+"'"; // Requete sql
             monReader = maRequete.ExecuteReader(); // Permet d'executer la requete
-            monReader.Read();
-            Auteur auteur = new Auteur(Convert.ToInt16(monReader["num"]), monReader["prenom"] as string, monReader["nom"] as string, monReader["nationalite"] as string);
-            Connection.MaConnection.Close(); // Ferme la connexion
+            while (monReader.Read()) // Tant qu'il lis quelque chose
+            {
+                unAuteur.Num = Convert.ToInt16(monReader["num"]);
+                unAuteur.Nom = monReader["nom"] == DBNull.Value ? "" : monReader["nom"] as string; // If ternaire
+            }
+            monReader.Close();
+            Connection.MaConnection2.Close(); // Ferme la connexion
 
-            return auteur;
-
-
+            return unAuteur;
         }
+
+
 
         public static bool ModifierAuteur(Auteur a)
         {
@@ -90,6 +95,10 @@ namespace PPE4_ADO_Csharp
 
                 throw new Exception(ex.Message);
             }
+            finally
+            {
+
+            }
         }
 
         public static bool AjouterAuteur(Auteur a)
@@ -121,6 +130,10 @@ namespace PPE4_ADO_Csharp
 
                 throw new Exception(ex.Message);
             }
+            finally
+            {
+
+            }
         }
 
         public static bool SupprimerAuteur(Auteur a)
@@ -151,6 +164,10 @@ namespace PPE4_ADO_Csharp
             {
 
                 throw new Exception(ex.Message);
+            }
+            finally
+            {
+
             }
         }
     }

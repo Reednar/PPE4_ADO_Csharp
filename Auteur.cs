@@ -19,12 +19,9 @@ namespace PPE4_ADO_Csharp
         public string Prenom { get => prenom; set => prenom = value; }
         public string Nationalite { get => nationalite; set => nationalite = value; }
 
-        public Auteur(int unNum, string unNom, string unPrenom, string uneNationalite)
+        public Auteur(string unNom)
         {
-            this.Num = unNum;
             this.Nom = unNom;
-            this.Prenom = unPrenom;
-            this.Nationalite = uneNationalite;
         }
 
         public Auteur()
@@ -34,7 +31,7 @@ namespace PPE4_ADO_Csharp
 
         public override string ToString()
         {
-            return this.Prenom.ToString() + this.Nom.ToString();
+            return this.Nom.ToString();
         }
 
     }
